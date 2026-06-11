@@ -9,6 +9,17 @@ const modules = [
   "Network Pulse"
 ];
 
+const homeTasks = [
+  ["FreeCommerce market node online", "MKT"],
+  ["Apartment A9 habitat synchronized", "A9"],
+  ["Data stream columns scanning", "DATA"],
+  ["Energy core stable at 86 percent", "PWR"],
+  ["Market flow receiving live pulse", "FLOW"],
+  ["Security layer access verified", "SEC"],
+  ["Transport node route recalculated", "TRN"],
+  ["Network pulse latency nominal", "NET"]
+];
+
 const homeCopy = [
   "T?NF UFDJFC/JD C?LL?II, LCNT?C?TN?RA UFC?JCF /F LCC D?VCCC?LT?C?F. CF?NF?LVD FRD, D?VCCC?TEDN V?FNAL T?NF CV?LLF?GT",
   "TLLC?TLL?J?T UFC?VFR?T, D?C?VFR?TT?J?T UFHCJTM V?T?RL",
@@ -199,6 +210,9 @@ let swipeStartX = 0;
 let swipeStartY = 0;
 let swipeCurrentX = 0;
 let isDraggingPopup = false;
+let activePopupPointerId = null;
+let popupCloseFallback = 0;
+let popupCloseAnimationHandler = null;
 
 function normalizeModule(name) {
   const rawName = String(name || "").trim();
@@ -266,12 +280,15 @@ function matrixValue(input, finalValue, duration = 720) {
 function buildTaskList() {
   if (!taskList) return;
 
-  taskList.innerHTML = modules.map((moduleName) => `
+  taskList.innerHTML = homeTasks.map(([label, tag], index) => {
+    const moduleName = modules[index] || modules[0];
+    return `
     <article class="task-item" data-module="${moduleName}">
-      <strong>${moduleName}</strong>
-      <span>INFO</span>
+      <strong>${label}</strong>
+      <span>${tag}</span>
     </article>
-  `).join("");
+    `;
+  }).join("");
 
   if (taskCount) taskCount.textContent = String(modules.length).padStart(2, "0");
 }
@@ -311,7 +328,7 @@ function resetHome() {
   activeModule = "";
   futureDevice.classList.add("home-state");
   futureDevice.classList.remove("module-state");
-  closePopup();
+  closePopup({ immediate: true });
   setActiveButtons("");
   if (leftKicker) matrixText(leftKicker, "NODE REPORT / A9", 640);
   if (leftTitle) matrixText(leftTitle, "FREECOMMERCE PROTOCOL", 780);
@@ -393,25 +410,61 @@ function renderPopup(moduleName) {
 }
 
 function openPopup(moduleName) {
+  window.clearTimeout(popupCloseFallback);
   renderPopup(moduleName);
-  popup.classList.remove("is-dismissing");
+  popup.classList.remove("is-closing", "is-dismissing", "is-dragging");
+  popupCard?.style.removeProperty("--drag-x");
+  popupCard?.style.removeProperty("--drag-opacity");
   popup.classList.add("is-open");
   popup.setAttribute("aria-hidden", "false");
 }
 
-function closePopup() {
-  popup.classList.remove("is-open", "is-dismissing", "is-dragging");
+function finishPopupClose() {
+  window.clearTimeout(popupCloseFallback);
+  if (popupCloseAnimationHandler) {
+    popupCard?.removeEventListener("animationend", popupCloseAnimationHandler);
+    popupCloseAnimationHandler = null;
+  }
+  isDraggingPopup = false;
+  activePopupPointerId = null;
+  popup.classList.remove("is-open", "is-closing", "is-dismissing", "is-dragging", "is-settling");
   popup.setAttribute("aria-hidden", "true");
   popupCard?.style.removeProperty("--drag-x");
   popupCard?.style.removeProperty("--drag-opacity");
 }
 
+function closePopup(options = {}) {
+  const isVisible = popup.classList.contains("is-open");
+  const isClosing = popup.classList.contains("is-closing") || popup.classList.contains("is-dismissing");
+
+  if (!isVisible && !isClosing) return;
+
+  if (options.immediate) {
+    finishPopupClose();
+    return;
+  }
+
+  window.clearTimeout(popupCloseFallback);
+  isDraggingPopup = false;
+  popup.classList.remove("is-dragging", "is-settling");
+  popup.classList.add(options.direction === "right" ? "is-dismissing" : "is-closing");
+  popup.setAttribute("aria-hidden", "true");
+
+  if (popupCloseAnimationHandler) {
+    popupCard?.removeEventListener("animationend", popupCloseAnimationHandler);
+  }
+
+  popupCloseAnimationHandler = (event) => {
+    if (event.target !== popupCard) return;
+    finishPopupClose();
+  };
+
+  popupCard?.addEventListener("animationend", popupCloseAnimationHandler);
+  popupCloseFallback = window.setTimeout(finishPopupClose, 720);
+}
+
 function dismissPopupToRight() {
-  popup.classList.remove("is-dragging");
-  popup.classList.add("is-dismissing");
-  popupCard?.style.removeProperty("--drag-x");
-  popupCard?.style.removeProperty("--drag-opacity");
-  window.setTimeout(closePopup, 420);
+  closePopup({ direction: "right" });
 }
 
 function selectModule(moduleName) {
@@ -472,8 +525,9 @@ function requestFullscreenOnce() {
 }
 
 function startPopupDrag(event) {
-  if (!popup.classList.contains("is-open")) return;
+  if (!popup.classList.contains("is-open") || popup.classList.contains("is-closing") || popup.classList.contains("is-dismissing")) return;
   isDraggingPopup = true;
+  activePopupPointerId = event.pointerId;
   swipeStartX = event.clientX;
   swipeStartY = event.clientY;
   swipeCurrentX = 0;
@@ -482,7 +536,7 @@ function startPopupDrag(event) {
 }
 
 function movePopupDrag(event) {
-  if (!isDraggingPopup || !popupCard) return;
+  if (!isDraggingPopup || !popupCard || event.pointerId !== activePopupPointerId) return;
   const deltaX = Math.max(0, event.clientX - swipeStartX);
   const deltaY = Math.abs(event.clientY - swipeStartY);
   swipeCurrentX = deltaX;
@@ -492,16 +546,23 @@ function movePopupDrag(event) {
 }
 
 function endPopupDrag(event) {
-  if (!isDraggingPopup) return;
+  if (!isDraggingPopup || event.pointerId !== activePopupPointerId) return;
   popupCard?.releasePointerCapture?.(event.pointerId);
   isDraggingPopup = false;
+  activePopupPointerId = null;
   if (swipeCurrentX > 130) {
     dismissPopupToRight();
     return;
   }
   popup.classList.remove("is-dragging");
-  popupCard?.style.removeProperty("--drag-x");
-  popupCard?.style.removeProperty("--drag-opacity");
+  popup.classList.add("is-settling");
+  popupCard?.style.setProperty("--drag-x", "0px");
+  popupCard?.style.setProperty("--drag-opacity", "1");
+  window.setTimeout(() => {
+    popup.classList.remove("is-settling");
+    popupCard?.style.removeProperty("--drag-x");
+    popupCard?.style.removeProperty("--drag-opacity");
+  }, 260);
 }
 
 function bindEvents() {

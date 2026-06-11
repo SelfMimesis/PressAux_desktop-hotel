@@ -592,11 +592,14 @@ button {
 
 .bottom-hud {
   position: absolute;
+  --status-width: clamp(300px, 25vw, 340px);
+  --status-height: clamp(168px, 18vw, 188px);
+  --dock-height: clamp(82px, 8.6vw, 92px);
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 14;
-  height: 190px;
+  height: var(--status-height);
   pointer-events: none;
 }
 
@@ -618,7 +621,7 @@ button {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 92px;
+  height: var(--dock-height);
   border-top: 1px solid rgba(235, 248, 214, 0.34);
   border-radius: 0;
 }
@@ -626,28 +629,30 @@ button {
 .bottom-hud::after {
   right: 0;
   bottom: 0;
-  width: 340px;
-  height: 188px;
+  width: var(--status-width);
+  height: var(--status-height);
   border-top: 1px solid rgba(235, 248, 214, 0.36);
-  border-left: 1px solid rgba(235, 248, 214, 0.36);
-  border-radius: 50px 0 0 0;
+  border-left: 0;
+  border-radius: 54px 0 0 0;
 }
 
 .bottom-tabs {
   position: absolute;
   left: 20px;
+  right: calc(var(--status-width) + 30px);
   bottom: 18px;
   z-index: 2;
-  display: flex;
-  gap: 10px;
-  max-width: calc(100% - 390px);
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: clamp(6px, 0.75vw, 10px);
   pointer-events: auto;
 }
 
 .bottom-tab {
-  min-width: 136px;
-  height: 36px;
-  padding: 0 12px;
+  width: 100%;
+  min-width: 0;
+  height: clamp(31px, 3vw, 36px);
+  padding: 0 clamp(6px, 0.8vw, 12px);
   border: 1px solid rgba(69, 111, 84, 0.52);
   border-radius: 24px;
   color: #244c54;
@@ -655,7 +660,7 @@ button {
   box-shadow:
     inset 0 0 11px rgba(255, 255, 236, 0.52),
     0 2px 8px rgba(23, 55, 46, 0.22);
-  font-size: clamp(7px, 0.76vw, 11px);
+  font-size: clamp(6px, 0.68vw, 11px);
 }
 
 .home-button {
@@ -683,15 +688,15 @@ button {
   right: 0;
   bottom: 0;
   z-index: 2;
-  width: 340px;
-  height: 188px;
+  width: var(--status-width);
+  height: var(--status-height);
   display: grid;
-  grid-template-columns: 64px 1fr 76px;
+  grid-template-columns: clamp(52px, 5vw, 64px) 1fr clamp(58px, 5.6vw, 76px);
   align-items: center;
-  gap: 14px;
-  padding: 38px 30px 28px 36px;
+  gap: clamp(8px, 1vw, 14px);
+  padding: clamp(30px, 3.2vw, 38px) clamp(22px, 2.4vw, 30px) clamp(24px, 2.5vw, 28px) clamp(28px, 3vw, 36px);
   border: 0;
-  border-radius: 50px 0 0 0;
+  border-radius: 54px 0 0 0;
   background: transparent;
   box-shadow: none;
   backdrop-filter: none;
@@ -700,7 +705,7 @@ button {
 
 .status-rings {
   position: relative;
-  width: 58px;
+  width: clamp(48px, 4.8vw, 58px);
   aspect-ratio: 1;
   display: grid;
   place-items: center;
@@ -735,7 +740,7 @@ button {
 .status-readout span {
   margin: 0;
   color: rgba(250, 244, 194, 0.9);
-  font-size: clamp(8px, 0.95vw, 13px);
+  font-size: clamp(7px, 0.82vw, 13px);
   line-height: 1;
   white-space: nowrap;
 }
@@ -746,8 +751,8 @@ button {
 }
 
 .status-logo {
-  width: 66px;
-  height: 66px;
+  width: clamp(56px, 5.2vw, 66px);
+  height: clamp(56px, 5.2vw, 66px);
   object-fit: cover;
   border-radius: 50%;
   box-shadow: 0 0 14px rgba(212, 230, 101, 0.42);
@@ -898,12 +903,26 @@ button {
   transition: none;
 }
 
+.future-popup.is-open.is-settling .popup-card {
+  animation: none;
+  opacity: var(--drag-opacity);
+  filter: blur(0);
+  transform: translateX(var(--drag-x)) scale(1);
+  transition: transform 260ms cubic-bezier(0.18, 0.9, 0.22, 1), opacity 260ms ease;
+}
+
+.future-popup.is-closing,
 .future-popup.is-dismissing {
+  opacity: 0;
   pointer-events: none;
 }
 
+.future-popup.is-closing .popup-card {
+  animation: popupCloseSoft 420ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
 .future-popup.is-dismissing .popup-card {
-  animation: popupDismissRight 420ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: popupDismissRight 520ms cubic-bezier(0.22, 0.82, 0.18, 1) forwards;
 }
 
 .popup-card::before {
@@ -1308,6 +1327,19 @@ button {
   }
 }
 
+@keyframes popupCloseSoft {
+  from {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    filter: blur(12px);
+    transform: scale(0.94) translateY(18px);
+  }
+}
+
 @keyframes popupDismissRight {
   from {
     opacity: 1;
@@ -1316,8 +1348,8 @@ button {
   }
   to {
     opacity: 0;
-    filter: blur(10px);
-    transform: translateX(55vw) scale(0.94);
+    filter: blur(12px);
+    transform: translateX(62vw) scale(0.96);
   }
 }
 
@@ -1413,15 +1445,16 @@ button {
   }
 
   .bottom-tabs {
-    flex-wrap: wrap;
     max-width: none;
     padding: 0;
     left: auto;
+    right: auto;
     bottom: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .bottom-tab {
-    flex: 1 1 180px;
+    min-height: 34px;
   }
 
   .status-widget {
