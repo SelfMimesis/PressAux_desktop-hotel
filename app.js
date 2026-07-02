@@ -212,6 +212,9 @@ let isDraggingPopup = false;
 let activePopupPointerId = null;
 let popupCloseFallback = 0;
 let popupCloseAnimationHandler = null;
+const FIRST_NOTICE_DELAY_MS = 900;
+const NOTICE_DELAY_MS = 6200;
+const LARGE_NOTICE_INTERVAL = 5;
 
 function normalizeModule(name) {
   const rawName = String(name || "").trim();
@@ -512,9 +515,9 @@ function showMiniPopup(message, variant = "large") {
 
 function scheduleMiniPopups(isInitial = false) {
   window.clearTimeout(miniTimer);
-  const delay = isInitial ? 900 : 6200;
+  const delay = isInitial ? FIRST_NOTICE_DELAY_MS : NOTICE_DELAY_MS;
   miniTimer = window.setTimeout(() => {
-    const variant = miniIndex % 2 === 0 ? "large" : "small";
+    const variant = (miniIndex + 1) % LARGE_NOTICE_INTERVAL === 0 ? "large" : "small";
     showMiniPopup(miniMessages[miniIndex % miniMessages.length], variant);
     miniIndex += 1;
     scheduleMiniPopups();
