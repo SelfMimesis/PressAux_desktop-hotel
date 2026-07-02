@@ -1,176 +1,180 @@
 const modules = [
-  "FreeCommerce",
-  "Apartment A9",
-  "Data Stream",
-  "Energy System",
-  "Market Flow",
-  "Security Layer",
-  "Transport Node",
-  "Network Pulse"
+  "Lobby Check-in",
+  "Suites",
+  "Concierge",
+  "Lounge",
+  "Housekeeping",
+  "Access Security",
+  "Transport",
+  "Facility Audit"
 ];
 
 const homeTasks = [
-  ["FreeCommerce market node online", "MKT"],
-  ["Apartment A9 habitat synchronized", "A9"],
-  ["Data stream columns scanning", "DATA"],
-  ["Energy core stable at 86 percent", "PWR"],
-  ["Market flow receiving live pulse", "FLOW"],
-  ["Security layer access verified", "SEC"],
-  ["Transport node route recalculated", "TRN"],
-  ["Network pulse latency nominal", "NET"]
+  ["PressAux arrival lanes open", "PX"],
+  ["TranrollinHyfa suites synchronized", "THY"],
+  ["Creative facility requests circulating", "LAB"],
+  ["Observation lounge pulse active", "LNG"],
+  ["Crew service carts routed", "CRW"],
+  ["PressAux access verified", "SEC"],
+  ["Sky-dock transfer recalculated", "SKY"],
+  ["Facility audit channel warm", "AUD"]
 ];
 
 const homeCopy = [
-  "FreeCommerce protocol is connected to Apartment A9 through the private domestic exchange layer.",
-  "The tablet interface is receiving market data, habitat telemetry and security status in a shared glass bus.",
-  "Local nodes are online. Commerce routing, energy balance and network pulse are running in quiet scan mode.",
-  "Apartment A9 reports stable interior conditions with locked access, balanced temperature and nominal ambient pressure.",
-  "Data stream columns are synchronized with the central visual field and ready for manual module inspection.",
-  "Energy System maintains a steady core at eighty six percent with low thermal drift and controlled consumption.",
-  "Market Flow is listening for live buy and sell routes while FreeCommerce keeps exchange packets validated.",
-  "Security Layer confirms encrypted perimeter status and keeps biometric access in passive verification mode.",
-  "Transport Node is prepared to calculate urban routes, autonomous vehicle timing and dock availability.",
-  "Network Pulse shows distributed connection health, low latency and active node communication across the interface.",
-  "All module tabs are available from the upper navigation and the bottom capsule controls.",
-  "Select a module to reveal its animated overlay, data blocks and capsule popup without changing the base desktop layout.",
-  "The home state remains clean, with only technical text, central scan columns and the task manager visible.",
-  "Returning home clears temporary drawings and restores the initial tablet desktop reference view."
+  "The future hotel of TranrollinHyfa keeps PressAux reception, suite telemetry and team routing connected through a private operations layer.",
+  "The desktop receives arrival signals, room status, creative facility requests and sky-dock timing in one glass bus.",
+  "Front desk lanes are online. PressAux guest flow, encrypted passes and service queue updates are running in quiet scan mode.",
+  "Suites report balanced climate, locked doors, production-ready workspaces and nominal corridor pressure.",
+  "Central columns synchronize with the lobby desk, team roster grid and animated movement tabs.",
+  "Crew service maintains a rolling route with linen stock, technical amenities and studio-support checks below threshold.",
+  "Concierge channels listen for dining, luggage, equipment room access and observation lounge requests across the team mesh.",
+  "Security confirms encrypted PressAux access and keeps badge verification in passive observation mode.",
+  "Transport is prepared to calculate sky-bay timing, autonomous pickup windows and private transfer availability.",
+  "Facility audit stays warm in the background, ready to reconcile occupancy, folios and operational deltas.",
+  "All TranrollinHyfa hotel modules are available from the moving upper navigation and the lower operations dock.",
+  "Select a module to reveal its animated overlay, PressAux data blocks and capsule popup without breaking the lobby view.",
+  "The home state keeps the hotel alive with moving marks, scan columns and a live team service queue.",
+  "Returning home clears temporary drawings and restores the PressAux Hotel TranrollinHyfa desktop."
 ];
 
 const moduleData = {
-  "FreeCommerce": {
-    action: "INITIALIZE TRADE",
-    subtitle: "Market data / exchange flow",
-    readout: "FREECOMMERCE",
+  "Lobby Check-in": {
+    action: "OPEN ARRIVALS",
+    subtitle: "PressAux arrival / TranrollinHyfa lobby",
+    readout: "PRESSAUX ARRIVAL",
     copy: [
-      "Live market data reroutes through FreeCommerce exchange nodes.",
-      "Animated trading lines show bid, ask and transfer pressure.",
-      "Commercial nodes are validating flow across Apartment A9."
+      "PressAux arrival lanes reroute through the illuminated TranrollinHyfa lobby desk.",
+      "Reservation pulses show team members, encrypted passes and suite release pressure.",
+      "Front desk nodes validate identity, folio status and modern facility assignment."
     ],
-    blocks: [["INDEX", "+4.28"], ["TRADE", "LIVE"], ["NODES", "12"], ["FLOW", "91"]],
-    fields: [["Market Index", "+4.28"], ["Exchange Flow", "91%"], ["Commercial Nodes", "12 active"], ["Trade Status", "Ready"]],
+    blocks: [["TEAM", "18"], ["PASSES", "LIVE"], ["LANES", "04"], ["FLOW", "94"]],
+    fields: [["PressAux Arrivals", "18 members"], ["Access Pass Flow", "Live"], ["Desk Lanes", "04 open"], ["Hyfa Lobby", "Ready"]],
     visual: "trade"
   },
-  "Apartment A9": {
-    action: "SYNC HABITAT",
-    subtitle: "Habitat state / interior environment",
-    readout: "APARTMENT A9",
+  "Suites": {
+    action: "SYNC SUITES",
+    subtitle: "Team suites / climate / work pods",
+    readout: "PRESSAUX SUITES",
     copy: [
-      "Apartment A9 habitat map is staged in glass-outline mode.",
-      "Temperature, access, energy and ambient fields are synchronized.",
-      "The house plan is adapted into the local HUD palette."
+      "PressAux suite plans are staged in glass-outline mode.",
+      "Climate, access, minibar and work-pod readiness are synchronized.",
+      "Room maps are adapted into the TranrollinHyfa hotel palette."
     ],
-    blocks: [["TEMP", "21.8"], ["ACCESS", "LOCK"], ["ENERGY", "86%"], ["AMBIENT", "SOFT"]],
-    fields: [["Temperature", "21.8 C"], ["Access", "Private lock"], ["Energy", "86%"], ["Ambient", "Low-noise"]],
+    blocks: [["OPEN", "27"], ["TEAM", "73%"], ["READY", "14"], ["PODS", "03"]],
+    fields: [["Open Suites", "27"], ["PressAux Occupancy", "73%"], ["Arrival Ready", "14 rooms"], ["Work Pods", "03"]],
     visual: "apartment"
   },
-  "Data Stream": {
-    action: "SCAN STREAM",
-    subtitle: "False code / flow graph",
-    readout: "DATA STREAM",
+  "Concierge": {
+    action: "ROUTE REQUESTS",
+    subtitle: "Dining / equipment / team care",
+    readout: "TEAM CONCIERGE",
     copy: [
-      "False code lines cascade through the vertical data buffer.",
-      "Stream graphs are scanning for signal drift and packet noise.",
-      "Column layers react to the current code density."
+      "Concierge requests cascade through the PressAux service buffer.",
+      "Dining, luggage, equipment access and late checkout paths pulse across the team mesh.",
+      "Column layers react to request density and TranrollinHyfa route priority."
     ],
-    blocks: [["RX", "92"], ["TX", "86"], ["SCAN", "ON"], ["DRIFT", "00"]],
-    fields: [["Code Buffer", "Active"], ["Flow Graph", "Scrolling"], ["Packet Drift", "00"], ["Scanner", "Enabled"]],
-    visual: "stream"
+    blocks: [["DINING", "06"], ["GEAR", "04"], ["TEAM", "02"], ["CARE", "ON"]],
+    fields: [["Dining Requests", "06"], ["Equipment Calls", "04"], ["Team Care", "02 active"], ["PressAux Care", "Online"]],
+    visual: "network"
   },
-  "Energy System": {
-    action: "BALANCE CORE",
-    subtitle: "Core percentage / stability / load",
-    readout: "ENERGY SYSTEM",
+  "Lounge": {
+    action: "OPEN SERVICE",
+    subtitle: "Observation lounge / ambient flow",
+    readout: "PRESSAUX LOUNGE",
     copy: [
-      "Energy core rotates between translucent capacitor layers.",
-      "Power draw remains stable while consumption is balanced.",
-      "Auxiliary glow is locked to the green operational band."
+      "Observation lounge service rotates between bar, table and team comfort layers.",
+      "Ambient load remains stable while the PressAux service cadence is balanced.",
+      "Auxiliary glow is locked to the cool cyan TranrollinHyfa hospitality band."
     ],
-    blocks: [["CORE", "86%"], ["STABLE", "99"], ["LOAD", "12.4"], ["HEAT", "COOL"]],
-    fields: [["Core Power", "86%"], ["Stability", "99%"], ["Consumption", "12.4 KW"], ["Thermal", "Cool"]],
+    blocks: [["TABLES", "11"], ["BAR", "LIVE"], ["MOOD", "COOL"], ["CREW", "64"]],
+    fields: [["Open Tables", "11"], ["Bar Status", "Live"], ["Ambient Mood", "Cool"], ["Team Load", "64%"]],
     visual: "energy"
   },
-  "Market Flow": {
-    action: "OPEN MARKET",
-    subtitle: "Buy / sell routes and fluctuations",
-    readout: "MARKET FLOW",
+  "Housekeeping": {
+    action: "DISPATCH CARTS",
+    subtitle: "Suite turns / amenities / crew support",
+    readout: "CREW SERVICE",
     copy: [
-      "Buy and sell paths are drawn over the commerce routing layer.",
-      "Indices fluctuate in controlled neon pulses.",
-      "Market assets are ready for active exchange."
+      "PressAux suite-turn paths are drawn over the service routing layer.",
+      "Linen, amenities and equipment-support checks fluctuate in controlled pulses.",
+      "Crew service carts are ready for active dispatch across TranrollinHyfa."
     ],
-    blocks: [["BUY", "7"], ["SELL", "5"], ["ASSETS", "28"], ["DELTA", "+1.8"]],
-    fields: [["Buy Routes", "7"], ["Sell Routes", "5"], ["Assets", "28"], ["Fluctuation", "+1.8"]],
+    blocks: [["TURNS", "09"], ["LINEN", "72"], ["CARTS", "05"], ["GEAR", "+3"]],
+    fields: [["Suite Turns", "09"], ["Linen Stock", "72%"], ["Active Carts", "05"], ["Support Delta", "+3"]],
     visual: "market"
   },
-  "Security Layer": {
+  "Access Security": {
     action: "VERIFY ACCESS",
-    subtitle: "Authentication / encryption / biometric access",
-    readout: "SECURITY LAYER",
+    subtitle: "PressAux passes / elevators / perimeter",
+    readout: "PRESSAUX SECURITY",
     copy: [
-      "Authentication rings verify the fictive biometric imprint.",
-      "Encrypted access channels are sealed across the perimeter.",
-      "Security confirms a clean pass through the local gate."
+      "Authentication rings verify PressAux passes and staff badges.",
+      "Encrypted elevator channels are sealed across the TranrollinHyfa perimeter.",
+      "Security confirms a clean pass through the modern lobby gate."
     ],
-    blocks: [["AUTH", "PASS"], ["CRYPT", "ON"], ["BIO", "MATCH"], ["RISK", "00"]],
-    fields: [["Authentication", "Passed"], ["Encryption", "Active"], ["Biometric", "Fictive match"], ["Risk", "00"]],
+    blocks: [["PASSES", "PASS"], ["LIFTS", "ON"], ["BADGE", "MATCH"], ["RISK", "00"]],
+    fields: [["PressAux Passes", "Passed"], ["Elevators", "Active"], ["Staff Badge", "Match"], ["Risk", "00"]],
     visual: "security"
   },
-  "Transport Node": {
+  "Transport": {
     action: "CALCULATE ROUTE",
-    subtitle: "Urban routes / autonomous vehicles / ETA",
-    readout: "TRANSPORT NODE",
+    subtitle: "Sky-dock / routes / ETA",
+    readout: "SKY TRANSPORT",
     copy: [
-      "Urban route lines recalculate across the transport node.",
-      "Autonomous vehicle traces move through dock corridors.",
-      "Estimated arrival is refreshed in the right task layer."
+      "Sky-dock route lines recalculate across the TranrollinHyfa hotel transport node.",
+      "Vehicle traces move through arrivals, luggage and private team corridors.",
+      "Estimated arrival is refreshed in the right PressAux service queue."
     ],
-    blocks: [["ROUTE", "03"], ["AUTO", "4"], ["ETA", "01:20"], ["DOCK", "READY"]],
-    fields: [["Urban Route", "Dock 03"], ["Autonomous Vehicles", "4"], ["ETA", "01:20"], ["Dock State", "Ready"]],
+    blocks: [["BAY", "03"], ["SKY", "04"], ["ETA", "01:20"], ["DOCK", "READY"]],
+    fields: [["Sky Bay", "Dock 03"], ["Vehicles", "04"], ["ETA", "01:20"], ["Dock State", "Ready"]],
     visual: "transport"
   },
-  "Network Pulse": {
-    action: "REFRESH PULSE",
-    subtitle: "Signal / nodes / latency / distributed connection",
-    readout: "NETWORK PULSE",
+  "Facility Audit": {
+    action: "RECONCILE",
+    subtitle: "Team occupancy / folios / facility audit",
+    readout: "FACILITY AUDIT",
     copy: [
-      "Distributed nodes are pulsing through the private signal field.",
-      "Latency is low and connection bands remain balanced.",
-      "Network echoes are mapped through the translucent grid."
+      "Distributed PressAux folio nodes pulse through the private audit field.",
+      "Facility deltas are low and team occupancy bands remain balanced.",
+      "TranrollinHyfa night echoes are mapped through the translucent hotel grid."
     ],
-    blocks: [["SIGNAL", "97%"], ["NODES", "18"], ["LAT", "11"], ["MESH", "ON"]],
-    fields: [["Signal", "97%"], ["Nodes", "18"], ["Latency", "11 MS"], ["Distributed Mesh", "Online"]],
-    visual: "network"
+    blocks: [["TEAM", "73%"], ["FOLIO", "18"], ["DELTA", "02"], ["MESH", "ON"]],
+    fields: [["Team Occupancy", "73%"], ["Open Folios", "18"], ["Delta", "02"], ["Audit Mesh", "Online"]],
+    visual: "stream"
   }
 };
 
 const miniMessages = [
-  "Apartment A9 sync complete",
-  "FreeCommerce node updated",
-  "Energy layer stabilized",
-  "Market pulse received",
-  "Security channel verified",
-  "Transport route recalculated",
-  "Network pulse refreshed",
-  "Data stream scan complete"
+  "PressAux team arrival confirmed in TranrollinHyfa",
+  "Modern suite wing synchronized for PressAux",
+  "Creative facility request routed to concierge",
+  "Observation lounge stabilized for team briefing",
+  "Crew service recalculated across hotel levels",
+  "PressAux access channel verified",
+  "Sky-dock transfer refreshed for the team",
+  "Facility audit scan complete in TranrollinHyfa",
+  "Private studio corridor unlocked for PressAux",
+  "Hospitality mesh adapting to team movement"
 ];
 
 const panelAliases = {
-  CORE: "Network Pulse",
-  MARKET: "Market Flow",
-  DATA: "Data Stream",
-  "APARTMENT A9": "Apartment A9",
-  FREECOMMERCE: "FreeCommerce",
-  SECURITY: "Security Layer",
-  "SECURITY LAYER": "Security Layer",
-  "DATA STREAM": "Data Stream",
-  ENERGY: "Energy System",
-  "ENERGY SYSTEM": "Energy System",
-  "MARKET FLOW": "Market Flow",
-  TRANSPORT: "Transport Node",
-  "TRANSPORT NODE": "Transport Node",
-  NETWORK: "Network Pulse",
-  "NETWORK PULSE": "Network Pulse"
+  CORE: "Facility Audit",
+  CHECKIN: "Lobby Check-in",
+  "CHECK-IN": "Lobby Check-in",
+  "LOBBY CHECK-IN": "Lobby Check-in",
+  LOBBY: "Lobby Check-in",
+  SUITES: "Suites",
+  ROOMS: "Suites",
+  CONCIERGE: "Concierge",
+  LOUNGE: "Lounge",
+  HOUSEKEEPING: "Housekeeping",
+  "ROOM SERVICE": "Housekeeping",
+  SECURITY: "Access Security",
+  "ACCESS SECURITY": "Access Security",
+  TRANSPORT: "Transport",
+  "NIGHT AUDIT": "Facility Audit",
+  "FACILITY AUDIT": "Facility Audit",
+  AUDIT: "Facility Audit"
 };
 
 const matrixChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ/?<>[]{}+=-_:;".split("");
@@ -213,11 +217,11 @@ function normalizeModule(name) {
   const rawName = String(name || "").trim();
   const upperName = rawName.toUpperCase();
   const moduleMatch = Object.keys(moduleData).find((moduleName) => moduleName.toLowerCase() === rawName.toLowerCase());
-  return panelAliases[rawName] || panelAliases[upperName] || moduleMatch || "FreeCommerce";
+  return panelAliases[rawName] || panelAliases[upperName] || moduleMatch || "Lobby Check-in";
 }
 
 function getModule(name) {
-  return moduleData[normalizeModule(name)] || moduleData.FreeCommerce;
+  return moduleData[normalizeModule(name)] || moduleData["Lobby Check-in"];
 }
 
 function matrixText(element, finalText, duration = 760) {
@@ -325,8 +329,8 @@ function resetHome() {
   futureDevice.classList.remove("module-state");
   closePopup({ immediate: true });
   setActiveButtons("");
-  if (leftKicker) matrixText(leftKicker, "NODE REPORT / A9", 640);
-  if (leftTitle) matrixText(leftTitle, "FREECOMMERCE PROTOCOL", 780);
+  if (leftKicker) matrixText(leftKicker, "TRANROLLINHYFA / TEAM ARRIVAL", 640);
+  if (leftTitle) matrixText(leftTitle, "PRESSAUX FUTURE HOTEL", 780);
   setCopy(homeCopy);
   if (visualReadoutLabel) visualReadoutLabel.textContent = "";
   if (visualReadoutTitle) visualReadoutTitle.textContent = "";
@@ -344,8 +348,8 @@ function renderModuleScreen(moduleName) {
   if (leftKicker) matrixText(leftKicker, `${data.readout} / LIVE`, 640);
   if (leftTitle) matrixText(leftTitle, `${data.readout} PROTOCOL`, 780);
   setCopy(data.copy.concat([
-    "Additional visual blocks are loaded only after interface selection.",
-    "Matrix text transition confirms the active system layer."
+    "Additional PressAux facility blocks are loaded only after interface selection.",
+    "Matrix text transition confirms the active TranrollinHyfa hospitality layer."
   ]));
   if (visualReadoutLabel) matrixText(visualReadoutLabel, `${data.readout} / ACTIVE MODULE`, 640);
   if (visualReadoutTitle) matrixText(visualReadoutTitle, data.readout, 860);
@@ -370,7 +374,7 @@ function popupVisual(type) {
         <path d="M95 76 L132 76 L154 102 L132 128 L96 128 L74 102 Z"></path>
         <path d="M160 90 L232 112 L216 164 L148 140 Z"></path>
         <path d="M166 108 L218 124 M158 124 L210 142 M154 138 L202 156"></path>
-        <text x="164" y="36">A9</text>
+        <text x="146" y="36">PX</text>
       </svg>`,
     stream: `<div class="code-stream">${Array.from({ length: 10 }, (_, i) => `<span style="--i:${i}">0x${(4417 + i * 37).toString(16)} / STREAM_PACKET_${i}</span>`).join("")}</div>`,
     energy: `<div class="energy-core"><span></span><span></span><span></span><strong>86%</strong></div>`,
@@ -468,29 +472,43 @@ function selectModule(moduleName) {
   openPopup(normalized);
 }
 
+function refreshMiniPopupLayer() {
+  const hasVisibleNotice = Boolean(topMiniPopups?.querySelector(".mini-popup"));
+  topMiniPopups?.classList.toggle("is-visible", hasVisibleNotice);
+  futureDevice?.classList.toggle("has-mini-popup", hasVisibleNotice);
+}
+
 function showMiniPopup(message) {
   if (!topMiniPopups) return;
 
+  topMiniPopups.querySelectorAll(".mini-popup").forEach((popupItem) => popupItem.remove());
+
   const note = document.createElement("article");
   note.className = "mini-popup";
-  note.innerHTML = `<strong></strong><span></span>`;
+  note.innerHTML = `
+    <img class="mini-popup-logo" src="assets/hotel/hotel-logo-primary.png" alt="" aria-hidden="true">
+    <div class="mini-popup-copy">
+      <strong></strong>
+      <span></span>
+    </div>
+  `;
   topMiniPopups.prepend(note);
-  matrixText(note.querySelector("strong"), "A9 NOTICE", 420);
+  refreshMiniPopupLayer();
+  matrixText(note.querySelector("strong"), "PRESSAUX / TRANROLLINHYFA", 420);
   matrixText(note.querySelector("span"), message, 680);
-
-  while (topMiniPopups.children.length > 2) {
-    topMiniPopups.lastElementChild.remove();
-  }
 
   window.setTimeout(() => {
     note.classList.add("is-leaving");
-    note.addEventListener("animationend", () => note.remove(), { once: true });
+    note.addEventListener("animationend", () => {
+      note.remove();
+      refreshMiniPopupLayer();
+    }, { once: true });
   }, 5200);
 }
 
-function scheduleMiniPopups() {
+function scheduleMiniPopups(isInitial = false) {
   window.clearTimeout(miniTimer);
-  const delay = 3000 + Math.random() * 57000;
+  const delay = isInitial ? 900 : 1600 + Math.random() * 5200;
   miniTimer = window.setTimeout(() => {
     showMiniPopup(miniMessages[miniIndex % miniMessages.length]);
     miniIndex += 1;
@@ -607,4 +625,4 @@ bindEvents();
 resetHome();
 openInitialPanelFromUrl();
 animateParallax();
-scheduleMiniPopups();
+scheduleMiniPopups(true);
